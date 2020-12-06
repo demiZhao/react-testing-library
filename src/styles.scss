@@ -1,0 +1,90 @@
+.App {
+  font-family: sans-serif;
+  font-size: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  color: #343a40;
+  max-width: 768px;
+  margin: 3em auto;
+}
+.clock {
+  flex: 1 0 300px; 
+  min-width: 150px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding-top: 20px;
+  background: #ccc;
+
+  .clock-settings {
+    margin: 2em;
+    input {
+      display: inline-block;
+      width: 3em;
+      font-size: inherit;
+      padding: 3px;
+      margin: 3px;
+    }
+
+    .error {
+      color: #a94442;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+      font-size: 1em;
+      margin: 3px;
+      padding-left: 3px;
+      text-align: left;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: #337ab7;
+      border-color: #2e6da4;
+      border-radius: 3px;
+      font-size: inherit;
+      padding: 3px;
+      width: 3em;
+    }
+    padding: 10px;
+  }
+  .digital-clock {
+    flex-basis: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4em;
+    text-shadow: 1px 1px 2px #000;
+    padding: 10px;
+  }
+
+  .analog-clock {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #000;
+    border-radius: 50%;
+    position: relative;
+    background: #fff;
+    .dial {
+      position: absolute;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      transform-origin: bottom left;
+      &.seconds {
+        border-left:solid 1px green;
+      }
+      &.minutes {
+        border-left:solid 1px #cc0000;
+      }
+      &.hours {
+        width: 35px;
+        height: 35px;
+        top: 15px;
+        border-left:solid 2px #000;
+      }
+    }
+  }
+}
+
+

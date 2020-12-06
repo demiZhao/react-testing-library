@@ -1,2 +1,3 @@
-# react-testing-library
+# react-sync-clock
+
 Created with CodeSandbox
