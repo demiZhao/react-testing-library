@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, memo } from "react";
 import { TimeContext } from "./app";
 
 const formatTime = (time) => {
@@ -21,8 +21,8 @@ const getHhmmss = (time) => {
   return { hours, minutes, seconds };
 };
 
-const ClockSetting = () => {
-  const { setTime } = useContext(TimeContext);
+const ClockSetting = memo(({ setTime }) => {
+  //const { setTime } = useContext(TimeContext);
 
   const [error, setError] = useState(null);
   const hasError = (hh, mm, ss) => isNaN(hh) || isNaN(mm) || isNaN(ss);
@@ -53,11 +53,7 @@ const ClockSetting = () => {
 
   return (
     <div className={"clock-settings"}>
-      {error && (
-        <div className={"error"} data-testid="error">
-          {error}
-        </div>
-      )}
+      {error && <div className={"error"}>{error}</div>}
       <div>
         <input
           ref={hhRef}
@@ -95,10 +91,10 @@ const ClockSetting = () => {
       </div>
     </div>
   );
-};
+});
 
 const DigitalClock = ({ title }) => {
-  const { time } = useContext(TimeContext);
+  const { time, setTime } = useContext(TimeContext);
   const { hours, minutes, seconds } = getHhmmss(time);
 
   return (
@@ -109,13 +105,13 @@ const DigitalClock = ({ title }) => {
           {formatTime(hours)}:{formatTime(minutes)}:{formatTime(seconds)}
         </span>
       </div>
-      <ClockSetting />
+      <ClockSetting setTime={setTime} />
     </div>
   );
 };
 
 const AnalogClock = ({ title }) => {
-  const { time } = useContext(TimeContext);
+  const { time, setTime } = useContext(TimeContext);
   const { hours, minutes, seconds } = getHhmmss(time);
 
   const secondsStyle = {
@@ -136,7 +132,7 @@ const AnalogClock = ({ title }) => {
         <div className={"dial minutes"} style={minutesStyle} />
         <div className={"dial hours"} style={hoursStyle} />
       </div>
-      <ClockSetting />
+      <ClockSetting setTime={setTime} />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
 import userEvent from "@testing-library/user-event";
 
 import { DigitalClock } from "./clock";
@@ -22,12 +24,10 @@ describe("Component render", () => {
     render(<DigitalClock title="Digital"></DigitalClock>);
     const hhInput = screen.getByTestId(/hh/i);
     userEvent.type(hhInput, "aa");
-    const btn = screen.getByTestId("btn");
+    const btn = screen.getByText("Set");
     userEvent.click(btn);
 
-    expect(screen.getByTestId("error").textContent).toBe(
-      "Error! Please enter number."
-    );
+    expect(screen.getByText(/Error!/)).toBeInTheDocument();
     expect(mockCtx.setTime).not.toHaveBeenCalled();
   });
 
@@ -39,10 +39,10 @@ describe("Component render", () => {
     userEvent.type(mmInput, "11");
     const ssInput = screen.getByTestId(/ss/i);
     userEvent.type(ssInput, "11");
-    const btn = screen.getByTestId("btn");
+    const btn = screen.getByText("Set");
     userEvent.click(btn);
 
-    expect(screen.queryByTestId("error")).toBeNull();
+    expect(screen.queryByText(/error/i)).toBeNull();
     expect(hhInput.value).toBeFalsy();
     expect(mmInput.value).toBeFalsy();
     expect(ssInput.value).toBeFalsy();
